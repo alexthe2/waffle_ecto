@@ -45,11 +45,15 @@ defmodule WaffleTest.Ecto.Schema do
     %{__struct__: Plug.Upload, path: path, filename: Path.basename(path)}
   end
 
-  test "supports :invalid changeset" do
+  test "supports invalid empty changeset" do
     cs = TestUser.changeset(%TestUser{})
     assert cs.valid? == false
     assert cs.changes == %{}
-    assert cs.errors == [avatar: {"can't be blank", [validation: :required]}]
+
+    assert cs.errors == [
+             avatar: {"can't be blank", [validation: :required]},
+             missing_attachment: {"no attachment(s) given to cast", []}
+           ]
   end
 
   test_with_mock "cascades storage success into a valid change", DummyDefinition,
