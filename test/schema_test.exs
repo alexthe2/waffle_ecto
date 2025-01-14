@@ -49,11 +49,7 @@ defmodule WaffleTest.Ecto.Schema do
     cs = TestUser.changeset(%TestUser{})
     assert cs.valid? == false
     assert cs.changes == %{}
-
-    assert cs.errors == [
-             avatar: {"can't be blank", [validation: :required]},
-             missing_attachment: {"no attachment(s) given to cast", []}
-           ]
+    assert cs.errors == [avatar: {"can't be blank", [validation: :required]}]
   end
 
   test_with_mock "cascades storage success into a valid change", DummyDefinition,

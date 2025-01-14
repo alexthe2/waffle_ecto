@@ -81,11 +81,7 @@ defmodule Waffle.Ecto.Schema do
           Ecto.Changeset.cast(changeset_or_data, waffle_params, allowed)
 
         _ ->
-          Ecto.Changeset.add_error(
-            changeset_or_data,
-            :missing_attachment,
-            "no attachment(s) given to cast"
-          )
+          changeset_or_data
       end
     end
   end
