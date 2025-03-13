@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.13 (2023-02-02)
+- Update dependencies
+- Added array support
+
 ## v0.0.12 (2023-02-02)
 - Update dependencies
 

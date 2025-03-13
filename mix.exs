@@ -1,12 +1,12 @@
 defmodule Waffle.Ecto.Mixfile do
   use Mix.Project
 
-  @version "0.0.12"
+  @version "0.0.13"
 
   def project do
     [app: :waffle_ecto,
      version: @version,
-     elixir: "~> 1.4",
+     elixir: "~> 1.18",
      elixirc_paths: elixirc_paths(Mix.env),
      deps: deps(),
      docs: docs(),
@@ -36,9 +36,9 @@ defmodule Waffle.Ecto.Mixfile do
   end
 
   defp package do
-    [maintainers: ["Boris Kuznetsov"],
+    [maintainers: ["Boris Kuznetsov", "Alexander Procelewski"],
      licenses: ["Apache 2.0"],
-     links: %{"GitHub" => "https://github.com/elixir-waffle/waffle_ecto"},
+     links: %{"GitHub" => "https://github.com/alexthe2/waffle_ecto"},
      files: ~w(mix.exs README.md CHANGELOG.md lib)]
   end
 
@@ -51,11 +51,12 @@ defmodule Waffle.Ecto.Mixfile do
 
   defp deps do
     [
-      {:waffle, "~> 1.0"},
-      {:ecto, "~> 3.0"},
+      {:waffle, "~> 1.1"},
+      {:ecto, "~> 3.12"},
       {:mock, "~> 0.3", only: :test},
       {:ex_doc, ">= 0.23.0", only: :dev},
-      {:credo, "~> 1.4", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:hackney, "~> 1.23"},
     ]
   end
 end
