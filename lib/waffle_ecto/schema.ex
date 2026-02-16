@@ -21,7 +21,7 @@ defmodule Waffle.Ecto.Schema do
           field :avatar, MyApp.Uploaders.AvatarUploader.Type
         end
 
-        def changeset(user, params \\ :invalid) do
+        def changeset(user, params \\ %{}) do
           user
           |> cast(params, [:name])
           |> cast_attachments(params, [:avatar])
@@ -69,20 +69,20 @@ defmodule Waffle.Ecto.Schema do
           end
         end)
 
-      waffle_params =
-        case params do
-          :invalid ->
-            :invalid
-
-          %{} ->
+      case params do
+        params when is_map(params) and map_size(params) > 0 ->
+          waffle_params =
             params
             |> convert_params_to_binary()
             |> Map.take(allowed_param_keys)
             |> check_and_apply_scope(scope, options)
             |> Enum.into(%{})
-        end
 
-      Ecto.Changeset.cast(changeset_or_data, waffle_params, allowed)
+          Ecto.Changeset.cast(changeset_or_data, waffle_params, allowed)
+
+        _ ->
+          changeset_or_data
+      end
     end
   end
 
